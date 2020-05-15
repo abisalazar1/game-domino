@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\MustBeUsersTurn;
+use App\Rules\GameMustHaveTilesInPool;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DrawRequest extends FormRequest
