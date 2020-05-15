@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
@@ -35,5 +36,15 @@ class Player extends Model
     public function tiles()
     {
         return $this->belongsToMany(Tile::class);
+    }
+
+    /**
+     * Sum of all tiles
+     *
+     * @return int
+     */
+    public function tileSum()
+    {
+        return $this->tiles()->sum(DB::raw('tiles.left_side + tiles.right_side'));
     }
 }
