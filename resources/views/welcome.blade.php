@@ -25,6 +25,14 @@
               <game-index />
             </v-col>
             <v-col cols="12" lg="8" md="8" sm="12">
+              <v-card class="mb-2" v-if="auth">
+                <v-card-title>
+                  You are connected as : @{{ auth.username }}
+                </v-card-title>
+                <v-card-subtitle>
+                  Code ID: @{{ auth.id }}
+                </v-card-subtitle>
+              </v-card>
               <game-show />
             </v-col>
 
@@ -32,7 +40,7 @@
           <v-row v-else>
             <v-col cols="12" lg="6" md="6" sm="12">
               <login />
-              
+
             </v-col>
             <v-col cols="12" lg="6" md="6" sm="12">
               <register />

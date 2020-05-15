@@ -20,6 +20,7 @@ Route::post('login', 'LoginController@store');
 
 
 Route::middleware('auth:api')->group(function () {
+    Route::get('auth', 'AuthController@show');
     Route::post('games/{game}/turns/skip', 'GameTurnController@skip');
     Route::post('games/{game}/turns/draw', 'GameTurnController@draw');
     Route::apiResource('games', 'GameController')->only(['index','store','show']);

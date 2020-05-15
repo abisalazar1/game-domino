@@ -78951,7 +78951,8 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   },
   data: function data() {
     return {
-      loggedIn: false
+      loggedIn: false,
+      auth: null
     };
   },
   vuetify: new vuetify__WEBPACK_IMPORTED_MODULE_1___default.a({
@@ -78963,14 +78964,28 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     checkToken: function checkToken() {
       var token = this.$api.getToken();
       this.loggedIn = !!token;
+    },
+    getAuth: function getAuth() {
+      var _this = this;
+
+      this.$api.get('auth').then(function (_ref) {
+        var data = _ref.data;
+        _this.auth = data;
+      });
+    }
+  },
+  watch: {
+    loggedIn: function loggedIn(value) {
+      if (!value) return;
+      this.getAuth();
     }
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     this.checkToken();
     Bus.$on('checkToken', function (payload) {
-      _this.checkToken();
+      _this2.checkToken();
     });
   }
 });

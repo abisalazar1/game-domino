@@ -42,7 +42,8 @@ new vue({
     gameShow
   },
   data: () => ({
-    loggedIn: false
+    loggedIn: false,
+    auth: null
   }),
   vuetify: new vuetify({
     theme: {
@@ -53,7 +54,23 @@ new vue({
     checkToken() {
       const token = this.$api.getToken();
       this.loggedIn = !!token;
+    },
+    getAuth() {
+      this.$api.get('auth').then(({ data }) => {
+        this.auth = data;
+      });
     }
+  },
+  watch: {
+
+    loggedIn(value) {
+      if (!value) return;
+
+      this.getAuth();
+
+
+    }
+
   },
   created() {
     this.checkToken();
