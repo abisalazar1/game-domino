@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Repositories\GameRepository;
 use Illuminate\Contracts\Validation\Rule;
 
 class GameMustHaveTilesInPool implements Rule
