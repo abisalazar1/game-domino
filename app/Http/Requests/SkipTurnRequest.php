@@ -28,7 +28,7 @@ class SkipTurnRequest extends FormRequest
             'game' => [
                 'required',
                 'integer',
-                // new MustBeUsersTurn($this->game, $this->user())
+                new MustBeUsersTurn($this->game, $this->user())
             ]
         ];
     }

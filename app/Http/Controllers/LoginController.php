@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Api\TokenService;
 use App\Http\Requests\LoginRequest;
-
+use App\Repositories\UserRepository;
 
 class LoginController extends Controller
 {
