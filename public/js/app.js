@@ -2327,6 +2327,9 @@ __webpack_require__.r(__webpack_exports__);
     Bus.$on("showGame", function (payload) {
       _this5.getGame(payload);
     });
+    setInterval(function () {
+      _this5.getGame(_this5.game);
+    }, 5000);
   }
 });
 

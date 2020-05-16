@@ -67,12 +67,12 @@ export default {
     },
     draw() {
       this.$api.post(`games/${this.game.id}/turns/draw`).then(({ data }) => {
-          this.getGame(this.game); 
+        this.getGame(this.game);
       });
     },
     skip() {
       this.$api.post(`games/${this.game.id}/turns/skip`).then(({ data }) => {
-          this.getGame(this.game); 
+        this.getGame(this.game);
       });
     },
     playTile(tile) {
@@ -118,11 +118,14 @@ export default {
       });
     }
   },
-
   created() {
     Bus.$on("showGame", payload => {
       this.getGame(payload);
     });
+
+    setInterval(() => {
+      this.getGame(this.game);
+    }, 5000);
   }
 };
 </script>
