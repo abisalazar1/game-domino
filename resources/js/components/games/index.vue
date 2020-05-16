@@ -66,12 +66,15 @@ export default {
       });
     },
     showGame(game) {
-
       Bus.$emit("showGame", game);
     }
   },
   created() {
     this.getList();
+
+    setInterval(() => {
+      this.getList();
+    }, 10000);
   }
 };
 </script>

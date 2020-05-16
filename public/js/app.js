@@ -2169,7 +2169,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    var _this3 = this;
+
     this.getList();
+    setInterval(function () {
+      _this3.getList();
+    }, 10000);
   }
 });
 
