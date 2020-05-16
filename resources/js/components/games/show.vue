@@ -17,12 +17,14 @@
                 class="font-weight-bold title"
               >{{ turn.tile.left_side }} : {{ turn.tile.right_side}}</span>
             </v-list-item-title>
-            <v-list-item-subtitle>Now Left Side Ends In {{ turn.left_pile_ends_in }} and Right Side Ends In {{ turn.right_pile_ends_in }}</v-list-item-subtitle>
+            <v-list-item-subtitle>Left Ends In {{ turn.left_pile_ends_in }} and Right Ends In {{ turn.right_pile_ends_in }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-card-text>
 
-      <v-card-actions class="d-flex">
+      <v-card-actions class="d-flex flex-wrap">
+        <span v-if="!game.winner">Current Turn: {{game.current_turn.username}}</span>
+        <span v-else>Winner: {{game.winner.username}}</span>
         <div class="ma-2">Players: {{game.players_count}}</div>
         <div class="ma-2">Tiles in pool: {{game.tiles_in_pool}}</div>
         <div class="ma-2">Played Tiles: {{game.tiles_played}}</div>

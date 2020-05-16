@@ -2244,6 +2244,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -24873,9 +24875,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("v-list-item-subtitle", [
                             _vm._v(
-                              "Now Left Side Ends In " +
+                              "Left Ends In " +
                                 _vm._s(turn.left_pile_ends_in) +
-                                " and Right Side Ends In " +
+                                " and Right Ends In " +
                                 _vm._s(turn.right_pile_ends_in)
                             )
                           ])
@@ -24891,8 +24893,19 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-card-actions",
-                { staticClass: "d-flex" },
+                { staticClass: "d-flex flex-wrap" },
                 [
+                  !_vm.game.winner
+                    ? _c("span", [
+                        _vm._v(
+                          "Current Turn: " +
+                            _vm._s(_vm.game.current_turn.username)
+                        )
+                      ])
+                    : _c("span", [
+                        _vm._v("Winner: " + _vm._s(_vm.game.winner.username))
+                      ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "ma-2" }, [
                     _vm._v("Players: " + _vm._s(_vm.game.players_count))
                   ]),
