@@ -17,6 +17,7 @@ class GameResource extends JsonResource
         return [
             'id' => $this->id,
             'owner' => new UserResource($this->owner),
+            'winner' => new UserResource($this->winner),
             'players' => PlayerResource::collection($this->players),
             'turns' => TurnResource::collection($this->turns),
             'tiles_in_pool' => $this->pool_count,

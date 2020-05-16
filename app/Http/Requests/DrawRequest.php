@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\MustBeUsersTurn;
+use App\Rules\MustNotHaveAWinner;
 use App\Rules\GameMustHaveTilesInPool;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -29,6 +30,7 @@ class DrawRequest extends FormRequest
             'game' => [
                 'required',
                 'integer',
+                new MustNotHaveAWinner($this->game),
                 new MustBeUsersTurn($this->game, $this->user()),
                 new GameMustHaveTilesInPool($this->game)
             ]

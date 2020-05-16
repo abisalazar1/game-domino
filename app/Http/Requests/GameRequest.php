@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\AllPlayersMustExist;
+use App\Rules\CheckUsersIds;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GameRequest extends FormRequest
@@ -25,7 +26,7 @@ class GameRequest extends FormRequest
     public function rules()
     {
         return [
-            'players' => ['required','array','between:2,4', new AllPlayersMustExist]
+            'players' => ['required','array',new CheckUsersIds($this->user()), new AllPlayersMustExist]
         ];
     }
 }

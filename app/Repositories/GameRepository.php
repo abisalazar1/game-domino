@@ -17,14 +17,16 @@ class GameRepository extends Repository
     }
 
     /**
-     * gets a list of games
+     * gets the list for specific user
      *
-     * pagination is set to 100 for the demo
+     * @param int $userId
      *
      * @return void
      */
-    public function index()
+    public function getListForUser(int $userId)
     {
-        return $this->model->with(['owner'])->paginate(100);
+        return $this->model->with(['owner'])->whereHas('players', function ($query) use ($userId) {
+            $query->where('players.user_id', $userId);
+        })->paginate(100);
     }
 }

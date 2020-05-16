@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\MustBeUsersTurn;
+use App\Rules\MustNotHaveAWinner;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SkipTurnRequest extends FormRequest
@@ -28,6 +29,7 @@ class SkipTurnRequest extends FormRequest
             'game' => [
                 'required',
                 'integer',
+                new MustNotHaveAWinner($this->game),
                 new MustBeUsersTurn($this->game, $this->user())
             ]
         ];

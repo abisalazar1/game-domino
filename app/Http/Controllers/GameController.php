@@ -30,7 +30,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        return GameCollectionResource::collection($this->repository->index());
+        return GameCollectionResource::collection($this->repository->getListForUser(auth()->user()->id));
     }
 
     /**

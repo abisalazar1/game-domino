@@ -4,7 +4,8 @@
       <v-card-title>
         Game {{ game.id }}
         <v-spacer />
-        Current Turn: {{game.current_turn.username}}
+        <span v-if="!game.winner">Current Turn: {{game.current_turn.username}}</span>
+        <span v-else>Winner: {{game.winner.username}}</span>
       </v-card-title>
 
       <v-card-text>
@@ -61,6 +62,7 @@ export default {
   mixins: [formActions],
   methods: {
     getGame({ id }) {
+      if (!id) return;
       this.$api.get(`games/${id}`).then(({ data }) => {
         this.game = data;
       });
@@ -124,7 +126,7 @@ export default {
     });
 
     setInterval(() => {
-      this.getGame(this.game);
+      this.getGame(this.game || {});
     }, 5000);
   }
 };

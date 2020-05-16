@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\MustBeUsersTurn;
 use App\Rules\MustHaveInHand;
+use App\Rules\MustBeUsersTurn;
+use App\Rules\MustNotHaveAWinner;
 use App\Rules\TileMustHaveOneOfTheNumbers;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -30,6 +31,7 @@ class TurnRequest extends FormRequest
             'tile_id' => [
                 'required',
                 'integer',
+                new MustNotHaveAWinner($this->game),
                 'exists:tiles,id',
                 new MustBeUsersTurn($this->game, $this->user()),
                 new MustHaveInHand($this->game, $this->user()),

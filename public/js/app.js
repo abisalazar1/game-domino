@@ -2238,6 +2238,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2253,6 +2254,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var id = _ref.id;
+      if (!id) return;
       this.$api.get("games/".concat(id)).then(function (_ref2) {
         var data = _ref2.data;
         _this.game = data;
@@ -2328,7 +2330,7 @@ __webpack_require__.r(__webpack_exports__);
       _this5.getGame(payload);
     });
     setInterval(function () {
-      _this5.getGame(_this5.game);
+      _this5.getGame(_this5.game || {});
     }, 5000);
   }
 });
@@ -24820,11 +24822,17 @@ var render = function() {
                 [
                   _vm._v("\n      Game " + _vm._s(_vm.game.id) + "\n      "),
                   _c("v-spacer"),
-                  _vm._v(
-                    "\n      Current Turn: " +
-                      _vm._s(_vm.game.current_turn.username) +
-                      "\n    "
-                  )
+                  _vm._v(" "),
+                  !_vm.game.winner
+                    ? _c("span", [
+                        _vm._v(
+                          "Current Turn: " +
+                            _vm._s(_vm.game.current_turn.username)
+                        )
+                      ])
+                    : _c("span", [
+                        _vm._v("Winner: " + _vm._s(_vm.game.winner.username))
+                      ])
                 ],
                 1
               ),
