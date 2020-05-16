@@ -70,14 +70,38 @@ export default {
       });
     },
     draw() {
-      this.$api.post(`games/${this.game.id}/turns/draw`).then(({ data }) => {
-        this.getGame(this.game);
-      });
+      this.$api
+        .post(`games/${this.game.id}/turns/draw`)
+        .then(({ data }) => {
+          this.getGame(this.game);
+          this.resetFormErrors();
+        })
+        .catch(({ data }) => {
+          this.setFormErrors(data);
+          if (this.formHasError("game")) {
+            Swal.fire({
+              icon: "error",
+              text: this.formGetError("game")
+            });
+          }
+        });
     },
     skip() {
-      this.$api.post(`games/${this.game.id}/turns/skip`).then(({ data }) => {
-        this.getGame(this.game);
-      });
+      this.$api
+        .post(`games/${this.game.id}/turns/skip`)
+        .then(({ data }) => {
+          this.getGame(this.game);
+          this.resetFormErrors();
+        })
+        .catch(({ data }) => {
+          this.setFormErrors(data);
+          if (this.formHasError("game")) {
+            Swal.fire({
+              icon: "error",
+              text: this.formGetError("game")
+            });
+          }
+        });
     },
     playTile(tile) {
       Swal.fire({
@@ -102,6 +126,7 @@ export default {
             })
             .then(({ data }) => {
               this.getGame(this.game);
+              this.resetFormErrors();
             })
             .catch(({ data }) => {
               this.setFormErrors(data);

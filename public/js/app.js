@@ -2274,15 +2274,41 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref3.data;
 
         _this2.getGame(_this2.game);
+
+        _this2.resetFormErrors();
+      })["catch"](function (_ref4) {
+        var data = _ref4.data;
+
+        _this2.setFormErrors(data);
+
+        if (_this2.formHasError("game")) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+            icon: "error",
+            text: _this2.formGetError("game")
+          });
+        }
       });
     },
     skip: function skip() {
       var _this3 = this;
 
-      this.$api.post("games/".concat(this.game.id, "/turns/skip")).then(function (_ref4) {
-        var data = _ref4.data;
+      this.$api.post("games/".concat(this.game.id, "/turns/skip")).then(function (_ref5) {
+        var data = _ref5.data;
 
         _this3.getGame(_this3.game);
+
+        _this3.resetFormErrors();
+      })["catch"](function (_ref6) {
+        var data = _ref6.data;
+
+        _this3.setFormErrors(data);
+
+        if (_this3.formHasError("game")) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+            icon: "error",
+            text: _this3.formGetError("game")
+          });
+        }
       });
     },
     playTile: function playTile(tile) {
@@ -2306,12 +2332,14 @@ __webpack_require__.r(__webpack_exports__);
           return _this4.$api.post("games/".concat(_this4.game.id, "/turns"), {
             tile_id: tile.id,
             side: side
-          }).then(function (_ref5) {
-            var data = _ref5.data;
+          }).then(function (_ref7) {
+            var data = _ref7.data;
 
             _this4.getGame(_this4.game);
-          })["catch"](function (_ref6) {
-            var data = _ref6.data;
+
+            _this4.resetFormErrors();
+          })["catch"](function (_ref8) {
+            var data = _ref8.data;
 
             _this4.setFormErrors(data);
 
