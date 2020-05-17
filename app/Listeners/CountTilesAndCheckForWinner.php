@@ -2,8 +2,9 @@
 
 namespace App\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Events\CheckTiles;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CountTilesAndCheckForWinner
 {
@@ -14,7 +15,7 @@ class CountTilesAndCheckForWinner
      * @param  object  $event
      * @return void
      */
-    public function handle($event)
+    public function handle(CheckTiles $event)
     {
         $game = $event->game;
 
@@ -27,7 +28,7 @@ class CountTilesAndCheckForWinner
     
         $game->load('players.tiles');
     
-        $pileEndings = [$event->turn->left_pile_ends_in, $event->turn->right_pile_ends_in];
+        $pileEndings = [$game->lastTurn->left_pile_ends_in, $game->lastTurn->right_pile_ends_in];
     
         // Check all players tiles and check if they can be played
         $canBeUse = $game->players->pluck('tiles')->flatten(1)->first(function ($tile) use ($pileEndings) {
@@ -42,7 +43,7 @@ class CountTilesAndCheckForWinner
                 return $player->tileSum();
             })->first();
     
-            $event->turn->game->setWinnerId($winner->user_id);
+            $game->setWinnerId($winner->user_id);
         }
     }
 }
