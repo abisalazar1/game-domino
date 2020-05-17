@@ -4,6 +4,7 @@ namespace App\Services\Game;
 
 use App\Game;
 use App\User;
+use App\Events\CheckTiles;
 use App\Repositories\GameRepository;
 
 class SkipTurnService
@@ -86,6 +87,8 @@ class SkipTurnService
         });
 
         $this->game->setCurrentTurn($nextUserToPlay->user_id);
+
+        CheckTiles::dispatch($this->game);
     }
 
     /**

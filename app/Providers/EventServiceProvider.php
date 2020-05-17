@@ -2,14 +2,16 @@
 
 namespace App\Providers;
 
+use App\Events\CheckTiles;
 use App\Events\SetUpNextTurn;
+use App\Listeners\SetNextTurn;
 use App\Listeners\CheckForWinner;
 use App\Listeners\RemovePlayedTile;
-use App\Listeners\SetNextTurn;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
+use App\Listeners\CountTilesAndCheckForWinner;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
             SetNextTurn::class,
             CheckForWinner::class
             
+        ],
+        CheckTiles::class => [
+            CountTilesAndCheckForWinner::class
         ]
     ];
 
